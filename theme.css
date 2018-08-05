@@ -1,0 +1,19 @@
+body{
+	background: hsla(35,80%,92%,1);
+}
+body>main{
+	background-color: hsla(0,0%,100%,1);
+	box-shadow: 0 0.05em 0.3em hsla(0,0%,0%,0.2);
+}
+
+body>main>section{
+	background-color: hsla(210,100%,80%,1);
+}
+
+body>main>section.falling{
+	background-color: hsla(270,100%,80%,1);
+}
+
+body>main>section:empty{
+	visibility: hidden;
+}
