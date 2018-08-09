@@ -1,7 +1,7 @@
 import 'https://ovo.fenzland.com/init.js';
 import View from 'https://ovo.fenzland.com/OvO/view/View.js';
 import { If, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
-import HTML, { main, header, footer, aside, section, article, div, h1, h2, p, small, a, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
+import HTML, { main, header, footer, aside, section, article, div, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
 import Radical from '/radical.js';
 import owo from 'https://assets.mallkd.com/owo.js/owo.js';
 
@@ -32,6 +32,12 @@ view.update(
 						{ style: { '--x':x, '--y':y, }, },
 					),
 				], ),
+			], ),
+			If( radical.states.over, ).then( [
+				dialog( 'Game Over', { class:'game-over', open:true, }, ),
+			], ),
+			If( radical.states.paused, ).then( [
+				dialog( 'Paused', { class:'paused', open:true, }, ),
 			], ),
 		),
 		aside(
