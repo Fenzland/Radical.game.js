@@ -45,6 +45,10 @@ export default class Radical
 					this.falling.y= maxDepth;
 					
 					setTimeout( async ()=> {
+						
+						if( this.falling.y < this.getMaxDepth( this.falling.x, ) )
+							return requestAnimationFrame( ()=> f( f, ), );
+						
 						falling= false;
 						this.falling.falling= false;
 						
@@ -59,7 +63,7 @@ export default class Radical
 					
 				}
 				else
-					requestAnimationFrame( ()=> f( f, ), );
+					return requestAnimationFrame( ()=> f( f, ), );
 			},
 		), );
 	}
