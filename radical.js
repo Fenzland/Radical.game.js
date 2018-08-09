@@ -8,6 +8,7 @@ export default class Radical
 		this.colC= colC;
 		this.rowC= rowC;
 		this.map= new Model( new Array( colC, ).fill( '', ).map( ()=> new Array( rowC, ).fill( '', ), ), );
+		this.next= new Model( '', );
 		this.falling= new Model( { falling:false, x:0, y:-1, character:'', }, );
 		this.spead= 4/100;
 		this.dropWaiting= 500;
@@ -15,11 +16,14 @@ export default class Radical
 	
 	async start()
 	{
+		this.next.setValue( randomUnit(), );
 		
 		while( true )
 		{
 			const startPoint= Math.floor( this.colC*Math.random(), );
-			const character= randomUnit();
+			const character= this.next.valueOf();
+			
+			this.next.setValue( randomUnit(), );
 			
 			await this.fall( character, startPoint, );
 		}
