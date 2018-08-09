@@ -9,6 +9,7 @@ export default class Radical
 		this.rowC= rowC;
 		this.map= new Model( new Array( colC, ).fill( '', ).map( ()=> new Array( rowC, ).fill( '', ), ), );
 		this.next= new Model( '', );
+		this.holding= new Model( '', );
 		this.falling= new Model( { falling:false, x:0, y:-1, character:'', }, );
 		this.spead= 4/100;
 		this.dropWaiting= 500;
@@ -115,6 +116,23 @@ export default class Radical
 			return;
 		
 		this.falling.y= this.getMaxDepth( this.falling.x, );
+	}
+	
+	hold()
+	{
+		const holding= this.holding.valueOf();
+		
+		if( holding )
+		{
+			this.holding.setValue( this.falling.character.valueOf(), );
+			this.falling.character= holding;
+		}
+		else
+		{
+			this.holding.setValue( this.falling.character.valueOf(), );
+			this.falling.character= this.next.valueOf();
+			this.next.setValue( randomUnit(), );
+		}
 	}
 	
 	async fill( x, y, character, )
