@@ -142,12 +142,32 @@ export default class Radical
 		}
 		
 		if( mergers.length )
-		{
 			this.map[x][y]= '';
-			
-			return Promise.all( mergers, );
-		}
 		else
 			this.map[x][y]= character;
+		
+		await Promise.all( mergers, );
+		
+		if( y > 1 && character )
+		{
+			const merged= mergeVertical( this.map[x][y - 1].valueOf(), character, );
+			
+			if( merged )
+				await Promise.all( [
+					this.fill( x, y, merged, ),
+					this.fill( x, y - 1, '', )
+				], );
+		}
+		
+		if(  y > 0 && !this.map[x][y].valueOf() )
+		{
+			const above= this.map[x][y - 1].valueOf();
+			
+			if( above )
+			{
+				await this.fill( x, y, above, );
+				await this.fill( x, y - 1, '', );
+			}
+		}
 	}
 }
