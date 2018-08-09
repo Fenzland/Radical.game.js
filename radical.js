@@ -1,4 +1,5 @@
 import Model from 'https://ovo.fenzland.com/OvO/model/Model.js';
+import { map, } from 'https://ovo.fenzland.com/OvO/support/EnumerableObject.js';
 import { randomUnit, mergeHorizontal, mergeVertical, } from './repertory.js'
 
 export default class Radical
@@ -17,6 +18,32 @@ export default class Radical
 		this.falling= new Model( { falling:false, x:0, y:-1, character:'', }, );
 		this.spead= 4/100;
 		this.dropWaiting= 500;
+	}
+	
+	export()
+	{
+		return {
+			colC: this.colC,
+			rowC: this.rowC,
+			map: this.map.valueOf(),
+			states: this.states.valueOf(),
+			falling: this.falling.valueOf(),
+		};
+	}
+	
+	import( script, )
+	{
+		if(!( this.colC===script.colC && this.rowC===script.rowC ))
+			throw 'size not match.';
+		
+		script.map.forEach( ( col, x, )=> {
+			col.forEach( ( character, y, )=> {
+				this.map[x][y]= character;
+			}, );
+		}, );
+		
+		map( script.states, ( key, value, )=> this.states[key]= value );
+		map( script.falling, ( key, value, )=> this.falling[key]= value );
 	}
 	
 	async start()
