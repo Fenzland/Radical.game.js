@@ -12,6 +12,7 @@ export default class Radical
 			next: '',
 			holding: '',
 			over: false,
+			paused: false,
 		}, );
 		this.falling= new Model( { falling:false, x:0, y:-1, character:'', }, );
 		this.spead= 4/100;
@@ -33,6 +34,26 @@ export default class Radical
 				break;
 			
 		}
+	}
+	
+	pause()
+	{
+		if( this.states.paused.valueOf() )
+		{
+			requestAnimationFrame( this.nextFrame, );
+			
+			this.states.paused= false;
+		}
+		else
+			this.states.paused= true;
+	}
+	
+	requestAnimationFrame( callback, )
+	{
+		if( this.states.paused.valueOf() )
+			this.nextFrame= callback;
+		else
+			requestAnimationFrame( callback, );
 	}
 	
 	fall( character, startPoint, )
@@ -57,7 +78,7 @@ export default class Radical
 					setTimeout( async ()=> {
 						
 						if( this.falling.y < this.getMaxDepth( this.falling.x, ) )
-							return requestAnimationFrame( ()=> f( f, ), );
+							return this.requestAnimationFrame( ()=> f( f, ), );
 						
 						falling= false;
 						this.falling.falling= false;
@@ -73,7 +94,7 @@ export default class Radical
 					
 				}
 				else
-					return requestAnimationFrame( ()=> f( f, ), );
+					return this.requestAnimationFrame( ()=> f( f, ), );
 			},
 		), );
 	}
@@ -89,6 +110,9 @@ export default class Radical
 	
 	moveLeft()
 	{
+		if( this.states.paused.valueOf() )
+			return;
+		
 		if(!( this.falling.falling.valueOf() ))
 			return;
 		
@@ -103,6 +127,9 @@ export default class Radical
 	
 	moveRight()
 	{
+		if( this.states.paused.valueOf() )
+			return;
+		
 		if(!( this.falling.falling.valueOf() ))
 			return;
 		
@@ -117,6 +144,9 @@ export default class Radical
 	
 	drop()
 	{
+		if( this.states.paused.valueOf() )
+			return;
+		
 		if(!( this.falling.falling ))
 			return;
 		
@@ -125,6 +155,9 @@ export default class Radical
 	
 	hold()
 	{
+		if( this.states.paused.valueOf() )
+			return;
+		
 		const holding= this.states.holding.valueOf();
 		
 		if( holding )
