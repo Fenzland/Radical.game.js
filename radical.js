@@ -8,9 +8,11 @@ export default class Radical
 		this.colC= colC;
 		this.rowC= rowC;
 		this.map= new Model( new Array( colC, ).fill( '', ).map( ()=> new Array( rowC, ).fill( '', ), ), );
-		this.next= new Model( '', );
-		this.holding= new Model( '', );
-		this.over= new Model( false, );
+		this.states= new Model( {
+			next: '',
+			holding: '',
+			over: false,
+		}, );
 		this.falling= new Model( { falling:false, x:0, y:-1, character:'', }, );
 		this.spead= 4/100;
 		this.dropWaiting= 500;
@@ -18,14 +20,14 @@ export default class Radical
 	
 	async start()
 	{
-		this.next.setValue( randomUnit(), );
+		this.states.next= randomUnit();
 		
 		while( true )
 		{
 			const startPoint= Math.floor( this.colC*Math.random(), );
-			const character= this.next.valueOf();
+			const character= this.states.next.valueOf();
 			
-			this.next.setValue( randomUnit(), );
+			this.states.next= randomUnit();
 			
 			if(!( await this.fall( character, startPoint, ) ))
 				break;
@@ -123,18 +125,18 @@ export default class Radical
 	
 	hold()
 	{
-		const holding= this.holding.valueOf();
+		const holding= this.states.holding.valueOf();
 		
 		if( holding )
 		{
-			this.holding.setValue( this.falling.character.valueOf(), );
+			this.states.holding= this.falling.character.valueOf();
 			this.falling.character= holding;
 		}
 		else
 		{
-			this.holding.setValue( this.falling.character.valueOf(), );
-			this.falling.character= this.next.valueOf();
-			this.next.setValue( randomUnit(), );
+			this.states.holding= this.falling.character.valueOf();
+			this.falling.character= this.states.next.valueOf();
+			this.states.next= randomUnit();
 		}
 	}
 	
@@ -215,7 +217,7 @@ export default class Radical
 	
 	gameOver()
 	{
-		this.over.setValue( true, );
+		this.states.over= true;
 		
 		return false;
 	}
