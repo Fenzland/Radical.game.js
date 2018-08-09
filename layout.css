@@ -71,6 +71,30 @@ body>main>section.falling{
 	z-index: 1;
 }
 
+body>main>dialog.game-over{
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	padding: 0.8em 1em;
+	border-width: 0;
+}
+
+body>main>dialog.paused{
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: calc( var(--colC)*var(--size) );
+	height: calc( var(--rowC)*var(--size) );
+	line-height: calc( var(--rowC)*var(--size) );
+	text-align: center;
+	padding: 0;
+	z-index: 2;
+	border-width: 0;
+}
+
 body>aside{
 	grid-area: aside;
 }
