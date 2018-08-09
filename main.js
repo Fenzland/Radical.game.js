@@ -11,6 +11,7 @@ const radical= new Radical( 8, 10, );
 owo.listen( 'KEY:ArrowLeft:0', ()=> radical.moveLeft(), );
 owo.listen( 'KEY:ArrowRight:0', ()=> radical.moveRight(), );
 owo.listen( 'KEY:ArrowDown:0', ()=> radical.drop(), );
+owo.listen( 'KEY:ArrowUp:0', ()=> radical.hold(), );
 
 radical.start();
 
@@ -31,7 +32,10 @@ view.update(
 				], ),
 			], ),
 		),
-		aside( 'aside', ),
+		aside(
+			div( '下一個字：', radical.next, ),
+			div( '手裏的字：', radical.holding, ),
+		),
 		footer( 'footer', ),
 	],
 )

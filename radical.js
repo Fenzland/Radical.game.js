@@ -10,6 +10,7 @@ export default class Radical
 		this.map= new Model( new Array( colC, ).fill( '', ).map( ()=> new Array( rowC, ).fill( '', ), ), );
 		this.next= new Model( '', );
 		this.holding= new Model( '', );
+		this.over= new Model( false, );
 		this.falling= new Model( { falling:false, x:0, y:-1, character:'', }, );
 		this.spead= 4/100;
 		this.dropWaiting= 500;
@@ -26,11 +27,13 @@ export default class Radical
 			
 			this.next.setValue( randomUnit(), );
 			
-			await this.fall( character, startPoint, );
+			if(!( await this.fall( character, startPoint, ) ))
+				break;
+			
 		}
 	}
 	
-	async fall( character, startPoint, )
+	fall( character, startPoint, )
 	{
 		this.falling.falling= true;
 		this.falling.character= character;
@@ -57,12 +60,12 @@ export default class Radical
 						falling= false;
 						this.falling.falling= false;
 						
-						await this.fill( this.falling.x.valueOf(), this.falling.y.valueOf(), this.falling.character.valueOf(), );
+						const result= await this.fill( this.falling.x.valueOf(), this.falling.y.valueOf(), this.falling.character.valueOf(), );
 						
 						this.falling.x= 0;
 						this.falling.y= -1;
 						
-						resolve();
+						resolve( result, );
 						
 					}, this.dropWaiting, );
 					
@@ -137,6 +140,13 @@ export default class Radical
 	
 	async fill( x, y, character, )
 	{
+		if( y <= 0 )
+		{
+			this.map[x][y]= character;
+			
+			return this.gameOver();
+		}
+		
 		const mergers= [];
 		
 		if( character )
@@ -199,5 +209,14 @@ export default class Radical
 				await this.fill( x, y - 1, '', );
 			}
 		}
+		
+		return true;
+	}
+	
+	gameOver()
+	{
+		this.over.setValue( true, );
+		
+		return false;
 	}
 }
