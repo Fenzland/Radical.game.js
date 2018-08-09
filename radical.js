@@ -117,28 +117,34 @@ export default class Radical
 	{
 		const mergers= [];
 		
-		if( x > 0 )
+		if( character )
 		{
-			const merged= mergeHorizontal( this.map[x - 1][y].valueOf(), character, );
+			// merge to Left
+			if( x > 0 )
+			{
+				const merged= mergeHorizontal( this.map[x - 1][y].valueOf(), character, );
+				
+				if( merged )
+					mergers.push( this.fill( x - 1, y, merged, ), );
+			}
 			
-			if( merged )
-				mergers.push( this.fill( x - 1, y, merged, ), );
-		}
-		
-		if( x < this.colC - 1 )
-		{
-			const merged= mergeHorizontal( character, this.map[x - - 1][y].valueOf(), );
+			// merge to Right
+			if( x < this.colC - 1 )
+			{
+				const merged= mergeHorizontal( character, this.map[x - - 1][y].valueOf(), );
+				
+				if( merged )
+					mergers.push( this.fill( x - - 1, y, merged, ), );
+			}
 			
-			if( merged )
-				mergers.push( this.fill( x - - 1, y, merged, ), );
-		}
-		
-		if( y <= this.colC )
-		{
-			const merged= mergeVertical( character, this.map[x][y - - 1].valueOf(), );
-			
-			if( merged )
-				mergers.push( this.fill( x, y - - 1, merged, ), );
+			// merge to Below
+			if( y <= this.colC )
+			{
+				const merged= mergeVertical( character, this.map[x][y - - 1].valueOf(), );
+				
+				if( merged )
+					mergers.push( this.fill( x, y - - 1, merged, ), );
+			}
 		}
 		
 		if( mergers.length )
@@ -148,6 +154,7 @@ export default class Radical
 		
 		await Promise.all( mergers, );
 		
+		// merge from Above
 		if( y > 1 && character )
 		{
 			const merged= mergeVertical( this.map[x][y - 1].valueOf(), character, );
@@ -159,6 +166,7 @@ export default class Radical
 				], );
 		}
 		
+		// If emptied, above fall down.
 		if(  y > 0 && !this.map[x][y].valueOf() )
 		{
 			const above= this.map[x][y - 1].valueOf();
