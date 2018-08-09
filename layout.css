@@ -75,6 +75,22 @@ body>aside{
 	grid-area: aside;
 }
 
+body>aside>.hints{
+	display: flex;
+	justify-content: space-evenly;
+	text-align: center;
+}
+
+body>aside>.hints section{
+	font-size: 2em;
+	width: 1em;
+	height: 1em;
+	line-height: 1em;
+	margin: auto;
+	padding: 0.25em;
+	border-radius: 0.05em;
+}
+
 body>footer{
 	grid-area: footer;
 }

@@ -17,3 +17,8 @@ body>main>section.falling{
 body>main>section:empty{
 	visibility: hidden;
 }
+
+body>aside>.hints section{
+	font-size: 2em;
+	background-color: hsla(210,100%,80%,1);
+}

@@ -33,8 +33,17 @@ view.update(
 			], ),
 		),
 		aside(
-			div( '下一個字：', radical.next, ),
-			div( '手裏的字：', radical.holding, ),
+			div(
+				{ class:'hints', },
+				div(
+					p( '下一個字：', ),
+					section( radical.states.next, ),
+				),
+				div(
+					p( '手裏的字：', ),
+					section( radical.states.holding, ),
+				),
+			),
 		),
 		footer( 'footer', ),
 	],
