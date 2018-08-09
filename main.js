@@ -12,6 +12,8 @@ owo.listen( 'KEY:ArrowLeft:0', ()=> radical.moveLeft(), );
 owo.listen( 'KEY:ArrowRight:0', ()=> radical.moveRight(), );
 owo.listen( 'KEY:ArrowDown:0', ()=> radical.drop(), );
 owo.listen( 'KEY:ArrowUp:0', ()=> radical.hold(), );
+owo.listen( 'KEY:Pause:0', ()=> radical.pause(), );
+owo.listen( 'KEY: :0', ()=> radical.pause(), );
 
 radical.start();
 
