@@ -7,6 +7,9 @@ export default class GameManager
 		this.radical= radical;
 		
 		radical.makeUnit= this.unitMaker;
+		radical.addEventListener( 'write', e=> this.write( e.character, ), );
+		radical.addEventListener( 'round_over', e=> this.roundSettle(), );
+		radical.addEventListener( 'game_over', e=> this.gameOver(), );
 		
 		this.states= new Model( {
 			level: 0,
@@ -23,6 +26,21 @@ export default class GameManager
 	async loadLevel()
 	{
 		this.level= await import(`./levels/level_${this.states.level}.js`);
+	}
+	
+	write( character, )
+	{
+		
+	}
+	
+	roundSettle()
+	{
+		
+	}
+	
+	gameOver()
+	{
+		
 	}
 	
 	get unitMaker()
