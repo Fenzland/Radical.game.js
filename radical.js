@@ -79,6 +79,33 @@ export default class Radical extends EventTarget
 		}
 	}
 	
+	restart()
+	{
+		this.clear();
+		
+		return this.start();
+	}
+	
+	clear()
+	{
+		this.map.forEach( ( col, x, )=> {
+			col.forEach( ( character, y, )=> {
+				this.map[x][y]= '';
+			}, );
+		}, );
+		
+		this.states.next= '';
+		this.states.holding= '';
+		this.states.over= false;
+		this.states.paused= false;
+		this.falling.falling= false;
+		this.falling.x= 0;
+		this.falling.y= -1;
+		this.falling.character= '';
+		
+		this.dispatchEvent( new Event( 'clear', ), );
+	}
+	
 	pause()
 	{
 		if( this.states.paused.valueOf() )
