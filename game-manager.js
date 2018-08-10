@@ -13,9 +13,13 @@ export default class GameManager
 		radical.addEventListener( 'round_over', e=> this.roundSettle(), );
 		radical.addEventListener( 'game_over', e=> this.gameOver(), );
 		
+		window.addEventListener( 'beforeunload', e=> this.store(), )
+		
 		this.states= new Model( {
 			level: 0,
 		}, );
+		
+		this.loadFromStorage();
 	}
 	
 	async start()
