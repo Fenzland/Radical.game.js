@@ -2,10 +2,12 @@ import Model from 'https://ovo.fenzland.com/OvO/model/Model.js';
 import { map, } from 'https://ovo.fenzland.com/OvO/support/EnumerableObject.js';
 import { randomUnit, mergeHorizontal, mergeVertical, } from './formulator.js'
 
-export default class Radical
+export default class Radical extends EventTarget
 {
 	constructor( colC, rowC, )
 	{
+		super();
+		
 		this.colC= colC;
 		this.rowC= rowC;
 		this.map= new Model( new Array( colC, ).fill( '', ).map( ()=> new Array( rowC, ).fill( '', ), ), );
@@ -56,6 +58,8 @@ export default class Radical
 			const character= this.states.next.valueOf();
 			
 			this.states.next= randomUnit();
+			
+			this.dispatchEvent( new Event( 'start', ), );
 			
 			if(!( await this.fall( character, startPoint, ) ))
 				break;
@@ -111,6 +115,8 @@ export default class Radical
 						this.falling.falling= false;
 						
 						const result= await this.fill( this.falling.x.valueOf(), this.falling.y.valueOf(), this.falling.character.valueOf(), );
+						
+						this.dispatchEvent( new Event( 'round_over', ), )
 						
 						this.falling.x= 0;
 						this.falling.y= -1;
@@ -213,6 +219,8 @@ export default class Radical
 		
 		if( character )
 		{
+			this.dispatchEvent( new WriteEvent( character, ), );
+			
 			// merge to Left
 			if( x > 0 )
 			{
@@ -277,8 +285,20 @@ export default class Radical
 	
 	gameOver()
 	{
+		this.dispatchEvent( new Event( 'game_over', ), );
+		
 		this.states.over= true;
 		
 		return false;
+	}
+}
+
+class WriteEvent extends Event
+{
+	constructor( character, )
+	{
+		super( 'write', ),
+		
+		Object.defineProperty( this, 'character', { value: character }, );
 	}
 }
