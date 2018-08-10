@@ -1,10 +1,12 @@
 import Model from 'https://ovo.fenzland.com/OvO/model/Model.js';
+import { map, } from 'https://ovo.fenzland.com/OvO/support/EnumerableObject.js';
 
 export default class GameManager
 {
-	constructor( radical, )
+	constructor( radical, storage, )
 	{
 		this.radical= radical;
+		this.storage= storage;
 		
 		radical.makeUnit= this.unitMaker;
 		radical.addEventListener( 'write', e=> this.write( e.character, ), );
@@ -26,6 +28,25 @@ export default class GameManager
 	async loadLevel()
 	{
 		this.level= await import(`./levels/level_${this.states.level}.js`);
+	}
+	
+	store()
+	{
+		this.storage.store( {
+			states: this.states.valueOf(),
+			radical: this.radical.export(),
+		}, );
+	}
+	
+	loadFromStorage()
+	{
+		const data= this.storage.restore();
+		
+		if(!( data ))
+			return;
+		
+		this.radical.import( data.radical, );
+		map( data.states, ( key, value, )=> this.states[key]= value );
 	}
 	
 	write( character, )

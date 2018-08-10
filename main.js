@@ -3,12 +3,13 @@ import View from 'https://ovo.fenzland.com/OvO/view/View.js';
 import { If, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
 import HTML, { main, header, footer, aside, section, article, div, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
 import Radical from '/radical.js';
+import storage from '/storage.js';
 import GameManager from '/game-manager.js';
 import owo from 'https://assets.mallkd.com/owo.js/owo.js';
 
 const view= new View( document.body, );
 const radical= new Radical( 8, 10, );
-const game_manager= new GameManager( radical, );
+const game_manager= new GameManager( radical, storage, );
 
 owo.listen( 'KEY:ArrowLeft:0', ()=> radical.moveLeft(), );
 owo.listen( 'KEY:ArrowRight:0', ()=> radical.moveRight(), );
