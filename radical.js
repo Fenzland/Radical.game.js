@@ -59,6 +59,9 @@ export default class Radical extends EventTarget
 		
 		while( true )
 		{
+			if( this.states.over.valueOf() )
+				break;
+			
 			const startPoint= Math.floor( this.colC*Math.random(), );
 			const character= this.states.next.valueOf();
 			
@@ -66,9 +69,7 @@ export default class Radical extends EventTarget
 			
 			this.dispatchEvent( new Event( 'start', ), );
 			
-			if(!( await this.fall( character, startPoint, ) ))
-				break;
-			
+			await this.fall( character, startPoint, )
 		}
 	}
 	
@@ -119,14 +120,14 @@ export default class Radical extends EventTarget
 						falling= false;
 						this.falling.falling= false;
 						
-						const result= await this.fill( this.falling.x.valueOf(), this.falling.y.valueOf(), this.falling.character.valueOf(), );
+						await this.fill( this.falling.x.valueOf(), this.falling.y.valueOf(), this.falling.character.valueOf(), );
 						
 						this.dispatchEvent( new Event( 'round_over', ), )
 						
 						this.falling.x= 0;
 						this.falling.y= -1;
 						
-						resolve( result, );
+						resolve();
 						
 					}, this.dropWaiting, );
 					
@@ -284,8 +285,6 @@ export default class Radical extends EventTarget
 				await this.fill( x, y - 1, '', );
 			}
 		}
-		
-		return true;
 	}
 	
 	gameOver()
@@ -293,8 +292,6 @@ export default class Radical extends EventTarget
 		this.dispatchEvent( new Event( 'game_over', ), );
 		
 		this.states.over= true;
-		
-		return false;
 	}
 }
 
