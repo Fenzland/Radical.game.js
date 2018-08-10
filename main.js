@@ -3,10 +3,12 @@ import View from 'https://ovo.fenzland.com/OvO/view/View.js';
 import { If, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
 import HTML, { main, header, footer, aside, section, article, div, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
 import Radical from '/radical.js';
+import GameManager from '/game-manager.js';
 import owo from 'https://assets.mallkd.com/owo.js/owo.js';
 
 const view= new View( document.body, );
 const radical= new Radical( 8, 10, );
+const game_manager= new GameManager( radical, );
 
 owo.listen( 'KEY:ArrowLeft:0', ()=> radical.moveLeft(), );
 owo.listen( 'KEY:ArrowRight:0', ()=> radical.moveRight(), );
@@ -15,11 +17,13 @@ owo.listen( 'KEY:ArrowUp:0', ()=> radical.hold(), );
 owo.listen( 'KEY:Pause:0', ()=> radical.pause(), );
 owo.listen( 'KEY: :0', ()=> radical.pause(), );
 
-radical.start();
+game_manager.start();
 
 view.update(
 	[
-		header( 'header', ),
+		header(
+			'關卡：', game_manager.states.level,
+		),
 		main(
 			section(
 				radical.falling.character,
