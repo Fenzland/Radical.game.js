@@ -23,6 +23,11 @@ body>main>section::selection{
 	color: hsla(0,0%,100%,1);
 }
 
+body>main>dialog::selection{
+	background-color: transparent;
+	color: transparent;
+}
+
 body>main>dialog.game-over{
 	text-shadow: 0 0.03em 0.14em hsla(14,100%,57%,1);
 	color: hsla(14,100%,57%,1);
@@ -31,9 +36,17 @@ body>main>dialog.game-over{
 	border-radius: 0.14px;
 }
 
-body>main>dialog.game-over::selection{
-	background-color: transparent;
-	color: transparent;
+body>main>dialog.game-over button{
+	background: hsl(210, 100%, 80%);
+	color: hsl(0, 0%, 100%);
+	border-radius: 0.2em;
+	transition: box-shadow 200ms, text-shadow 200ms;
+}
+
+body>main>dialog.game-over button:hover,
+body>main>dialog.game-over button:active{
+	box-shadow: inset 0 0.05em 0.2em hsla(0, 0%, 0%, 0.2);
+	text-shadow: 0 0.05em 0.2em hsla(0, 0%, 0%, 0.2);
 }
 
 body>main>dialog.paused{

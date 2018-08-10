@@ -79,6 +79,16 @@ body>main>dialog.game-over{
 	z-index: 2;
 	padding: 0.8em 1em;
 	border-width: 0;
+	text-align: center;
+}
+
+body>main>dialog.game-over>p{
+	margin: 0;
+}
+
+body>main>dialog.game-over button{
+	font-size: 2rem;
+	border: none;
 }
 
 body>main>dialog.paused{

@@ -1,7 +1,8 @@
 import 'https://ovo.fenzland.com/init.js';
 import View from 'https://ovo.fenzland.com/OvO/view/View.js';
+import Listener from 'https://ovo.fenzland.com/OvO/view/Listener.js';
 import { If, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
-import HTML, { main, header, footer, aside, section, article, div, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
+import HTML, { main, header, footer, aside, section, article, div, button, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
 import Radical from '/radical.js';
 import storage from '/storage.js';
 import GameManager from '/game-manager.js';
@@ -39,7 +40,11 @@ view.update(
 				], ),
 			], ),
 			If( radical.states.over, ).then( [
-				dialog( 'Game Over', { class:'game-over', open:true, }, ),
+				dialog(
+					{ class:'game-over', open:true, },
+					p( 'Game Over', ),
+					p( button( 'restart', new Listener( 'click', ()=> radical.restart(), ), ), ),
+				),
 			], ),
 			If( radical.states.paused, ).then( [
 				dialog( 'Paused', { class:'paused', open:true, }, ),
