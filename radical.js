@@ -1,6 +1,6 @@
 import Model from 'https://ovo.fenzland.com/OvO/model/Model.js';
 import { map, } from 'https://ovo.fenzland.com/OvO/support/EnumerableObject.js';
-import { randomUnit, mergeHorizontal, mergeVertical, } from './repertory.js'
+import { randomUnit, mergeHorizontal, mergeVertical, } from './formulator.js'
 
 export default class Radical
 {

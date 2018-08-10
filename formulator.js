@@ -1,6 +1,6 @@
-import units from './repertory/units.js';
-import horizontal from './repertory/horizontal.js';
-import vertical from './repertory/vertical.js';
+import units from './formulae/units.js';
+import horizontal from './formulae/horizontal.js';
+import vertical from './formulae/vertical.js';
 
 export function randomUnit()
 {
