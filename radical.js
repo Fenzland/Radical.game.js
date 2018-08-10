@@ -1,6 +1,6 @@
 import Model from 'https://ovo.fenzland.com/OvO/model/Model.js';
 import { map, } from 'https://ovo.fenzland.com/OvO/support/EnumerableObject.js';
-import { randomUnit, mergeHorizontal, mergeVertical, } from './formulator.js'
+import { mergeHorizontal, mergeVertical, } from './formulator.js'
 
 export default class Radical extends EventTarget
 {
@@ -48,16 +48,21 @@ export default class Radical extends EventTarget
 		map( script.falling, ( key, value, )=> this.falling[key]= value );
 	}
 	
+	makeUnit()
+	{
+		return '一';
+	}
+	
 	async start()
 	{
-		this.states.next= randomUnit();
+		this.states.next= this.makeUnit();
 		
 		while( true )
 		{
 			const startPoint= Math.floor( this.colC*Math.random(), );
 			const character= this.states.next.valueOf();
 			
-			this.states.next= randomUnit();
+			this.states.next= this.makeUnit();
 			
 			this.dispatchEvent( new Event( 'start', ), );
 			
@@ -202,7 +207,7 @@ export default class Radical extends EventTarget
 		{
 			this.states.holding= this.falling.character.valueOf();
 			this.falling.character= this.states.next.valueOf();
-			this.states.next= randomUnit();
+			this.states.next= this.makeUnit();
 		}
 	}
 	

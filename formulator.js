@@ -1,11 +1,5 @@
-import units from './formulae/units.js';
 import horizontal from './formulae/horizontal.js';
 import vertical from './formulae/vertical.js';
-
-export function randomUnit()
-{
-	return units[Math.floor( units.length*Math.random(), )];
-}
 
 export function mergeHorizontal( ...args )
 {
