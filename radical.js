@@ -55,21 +55,27 @@ export default class Radical extends EventTarget
 	
 	async start()
 	{
-		this.states.next= this.makeUnit();
+		if( this.states.over.valueOf() )
+			return;
+		
+		if( this.falling.character.valueOf() )
+			await this.fall( this.falling.character.valueOf(), this.falling.x.valueOf(), this.falling.y.valueOf(), );
+		else
+			this.states.next= this.makeUnit();
 		
 		while( true )
 		{
 			if( this.states.over.valueOf() )
 				break;
 			
-			const startPoint= Math.floor( this.colC*Math.random(), );
+			const startX= Math.floor( this.colC*Math.random(), );
 			const character= this.states.next.valueOf();
 			
 			this.states.next= this.makeUnit();
 			
 			this.dispatchEvent( new Event( 'start', ), );
 			
-			await this.fall( character, startPoint, )
+			await this.fall( character, startX, )
 		}
 	}
 	
@@ -93,12 +99,12 @@ export default class Radical extends EventTarget
 			requestAnimationFrame( callback, );
 	}
 	
-	fall( character, startPoint, )
+	fall( character, startX, startY=-1, )
 	{
 		this.falling.falling= true;
 		this.falling.character= character;
-		this.falling.x= startPoint;
-		this.falling.y= -1;
+		this.falling.x= startX;
+		this.falling.y= startY;
 		
 		let falling= true;
 		
