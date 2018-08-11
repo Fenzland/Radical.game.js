@@ -258,7 +258,7 @@ export default class Radical extends EventTarget
 		
 		if( character )
 		{
-			this.dispatchEvent( new WriteEvent( character, ), );
+			this.dispatchEvent( new WriteEvent( character, x, y, ), );
 			
 			// merge to Left
 			if( x > 0 )
@@ -330,10 +330,12 @@ export default class Radical extends EventTarget
 
 class WriteEvent extends Event
 {
-	constructor( character, )
+	constructor( character, x, y, )
 	{
 		super( 'write', ),
 		
-		Object.defineProperty( this, 'character', { value: character }, );
+		Object.defineProperty( this, 'character', { value: character, }, );
+		Object.defineProperty( this, 'x', { value: x, }, );
+		Object.defineProperty( this, 'y', { value: y, }, );
 	}
 }
