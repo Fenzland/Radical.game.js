@@ -29,14 +29,22 @@ body>main>dialog::selection{
 }
 
 body>main>dialog.game-over{
-	text-shadow: 0 0.03em 0.14em hsla(14,100%,57%,1);
+	text-shadow: 0 0.03em 0.14em currentColor;
 	color: hsla(14,100%,57%,1);
 	background: hsla(0,0%,100%,0.83);
 	box-shadow: 0 0.03em 0.14em hsla(14,100%,57%,0.2);
 	border-radius: 0.14px;
 }
 
-body>main>dialog.game-over button{
+body>main>dialog.level-cleared{
+	text-shadow: 0 0.03em 0.14em currentColor;
+	color: hsla(120,100%,43%,1);
+	background: hsla(0,0%,100%,0.83);
+	box-shadow: 0 0.03em 0.14em hsla(14,100%,57%,0.2);
+	border-radius: 0.14px;
+}
+
+body>main>dialog button{
 	background: hsl(210, 100%, 80%);
 	color: hsl(0, 0%, 100%);
 	border-radius: 0.2em;

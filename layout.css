@@ -71,7 +71,7 @@ body>main>section.falling{
 	z-index: 1;
 }
 
-body>main>dialog.game-over{
+body>main>dialog{
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -82,11 +82,11 @@ body>main>dialog.game-over{
 	text-align: center;
 }
 
-body>main>dialog.game-over>p{
+body>main>dialog>p{
 	margin: 0;
 }
 
-body>main>dialog.game-over button{
+body>main>dialog button{
 	font-size: 2rem;
 	border: none;
 }
