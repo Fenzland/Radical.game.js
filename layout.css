@@ -92,17 +92,12 @@ body>main>dialog button{
 }
 
 body>main>dialog.paused{
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: calc( var(--colC)*var(--size) );
-	height: calc( var(--rowC)*var(--size) );
-	line-height: calc( var(--rowC)*var(--size) );
-	text-align: center;
-	padding: 0;
-	z-index: 2;
-	border-width: 0;
+	top: -100vmax;
+	bottom: -100vmax;
+	left: -100vmax;
+	right: -100vmax;
+	border: 100vmax solid hsla(0,0%,100%,1);
+	border-radius: 0;
 }
 
 body>aside{
