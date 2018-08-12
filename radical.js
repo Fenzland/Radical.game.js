@@ -79,7 +79,7 @@ export default class Radical extends EventTarget
 		}
 	}
 	
-	restart()
+	async restart()
 	{
 		this.clear();
 		
@@ -108,9 +108,13 @@ export default class Radical extends EventTarget
 	
 	pause()
 	{
+		if( this.states.over.valueOf() )
+			return this.states.paused= false;
+		
 		if( this.states.paused.valueOf() )
 		{
-			requestAnimationFrame( this.nextFrame, );
+			if( this.nextFrame )
+				requestAnimationFrame( this.nextFrame, );
 			
 			this.states.paused= false;
 		}
@@ -324,6 +328,7 @@ export default class Radical extends EventTarget
 	{
 		this.dispatchEvent( new Event( 'game_over', ), );
 		
+		this.states.paused= false;
 		this.states.over= true;
 	}
 }
