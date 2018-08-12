@@ -34,6 +34,22 @@ export default class GameManager
 		this.radical.start();
 	}
 	
+	async restart()
+	{
+		this.states.cleared= false;
+		
+		await this.loadLevel();
+		
+		return this.radical.restart();
+	}
+	
+	async nextLevel()
+	{
+		++this.states.level;
+		
+		return this.restart();
+	}
+	
 	levelClear()
 	{
 		this.states.cleared= true;
