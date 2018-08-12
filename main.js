@@ -1,7 +1,7 @@
 import 'https://ovo.fenzland.com/init.js';
 import View from 'https://ovo.fenzland.com/OvO/view/View.js';
 import Listener from 'https://ovo.fenzland.com/OvO/view/Listener.js';
-import { If, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
+import { If, IfNot, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
 import HTML, { main, header, footer, aside, section, article, div, button, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
 import { $, } from 'https://ovo.fenzland.com/OvO/model/Model.js';
 import Radical from '/radical.js';
@@ -45,7 +45,20 @@ view.update(
 			If( radical.states.paused, ).then( [
 				dialog( 'Paused', { class:'paused', open:true, }, ),
 			], ),
-			If( radical.states.over, ).then( [
+			If( game_manager.states.cleared, ).then( [
+				dialog(
+					{ class:'level-cleared', open:true, },
+					p( 'Level Cleared', ),
+					p(
+						IfNot( game_manager.states.is_last_level, ).then( [
+							button( 'next level', new Listener( 'click', ()=> game_manager.nextLevel(), ), ),
+							' ',
+						], ),
+						button( 'replay', new Listener( 'click', ()=> game_manager.restart(), ), ),
+					),
+				),
+			] ),
+			If( $( ( cleared, over, )=> !cleared&&over, game_manager.states.cleared, radical.states.over, ), ).then( [
 				dialog(
 					{ class:'game-over', open:true, },
 					p( 'Game Over', ),
