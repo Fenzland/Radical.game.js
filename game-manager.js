@@ -17,6 +17,7 @@ export default class GameManager
 		
 		this.states= new Model( {
 			level: 0,
+			cleared: false,
 			is_last_level: true,
 			goals: [],
 			level_title: '',
@@ -31,6 +32,12 @@ export default class GameManager
 		await this.loadLevel();
 		
 		this.radical.start();
+	}
+	
+	levelClear()
+	{
+		this.states.cleared= true;
+		this.radical.gameOver();
 	}
 	
 	async loadLevel()
@@ -68,6 +75,9 @@ export default class GameManager
 			if( goal.character.valueOf()===character )
 				goal.made= true;
 		}, );
+		
+		if( this.states.goals.reduce( ( r, x, )=> x.made.valueOf() && r, true, ) )
+			this.levelClear();
 	}
 	
 	roundSettle()
