@@ -43,7 +43,11 @@ view.update(
 				], ),
 			], ),
 			If( radical.states.paused, ).then( [
-				dialog( 'Paused', { class:'paused', open:true, }, ),
+				dialog(
+					{ class:'paused', open:true, },
+					'Paused',
+					p( button( 'restart', new Listener( 'click', ()=> game_manager.restart(), ), ), ),
+				),
 			], ),
 			If( game_manager.states.cleared, ).then( [
 				dialog(
