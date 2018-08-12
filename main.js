@@ -46,7 +46,7 @@ view.update(
 				dialog(
 					{ class:'game-over', open:true, },
 					p( 'Game Over', ),
-					p( button( 'restart', new Listener( 'click', ()=> radical.restart(), ), ), ),
+					p( button( 'restart', new Listener( 'click', ()=> game_manager.restart(), ), ), ),
 				),
 			], ),
 			If( radical.states.paused, ).then( [
