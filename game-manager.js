@@ -38,7 +38,7 @@ export default class GameManager
 	{
 		this.states.cleared= false;
 		
-		await this.loadLevel();
+		await this.loadLevel( true, );
 		
 		return this.radical.restart();
 	}
@@ -56,14 +56,16 @@ export default class GameManager
 		this.radical.gameOver();
 	}
 	
-	async loadLevel()
+	async loadLevel( force=false, )
 	{
 		this.level= await import(`./levels/level_${this.states.level}.js`);
 		
 		this.states.is_last_level= this.level.is_last_level;
 		this.states.level_title= this.level.title;
 		this.states.level_comment= this.level.comment;
-		this.states.goals= this.level.goals.map( goal=> Object.assign( { made:false, }, goal, ), );
+		
+		if( force || this.states.goals.length<=0 )
+			this.states.goals= this.level.goals.map( goal=> Object.assign( { made:false, }, goal, ), );
 	}
 	
 	store()
