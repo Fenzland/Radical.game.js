@@ -64,7 +64,10 @@ export default class GameManager
 	
 	write( character, )
 	{
-		
+		this.states.goals.forEach( ( goal, i, )=> {
+			if( goal.character.valueOf()===character )
+				goal.made= true;
+		}, );
 	}
 	
 	roundSettle()
