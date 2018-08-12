@@ -109,13 +109,8 @@ body>aside{
 	grid-area: aside;
 }
 
-body>aside>.hints{
-	display: flex;
-	justify-content: space-evenly;
-	text-align: center;
-}
-
-body>aside>.hints section{
+body>aside section{
+	display: inline-block;
 	font-size: 2em;
 	width: 1em;
 	height: 1em;
@@ -123,6 +118,27 @@ body>aside>.hints section{
 	margin: auto;
 	padding: 0.25em;
 	border-radius: 0.05em;
+}
+
+body>aside>:not(:first-child){
+	margin-top: 2rem;
+}
+
+body>aside>.hints{
+	display: flex;
+	justify-content: space-evenly;
+	text-align: center;
+}
+
+body>aside>.goals>header{
+	text-align: center;
+	line-height: 4em;
+}
+
+body>aside>.goals>main{
+	display: flex;
+	justify-content: space-evenly;
+	text-align: center;
 }
 
 body>footer{
