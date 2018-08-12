@@ -17,6 +17,10 @@ export default class GameManager
 		
 		this.states= new Model( {
 			level: 0,
+			is_last_level: true,
+			goals: [],
+			level_title: '',
+			level_comment: '',
 		}, );
 		
 		this.loadFromStorage();
@@ -32,6 +36,11 @@ export default class GameManager
 	async loadLevel()
 	{
 		this.level= await import(`./levels/level_${this.states.level}.js`);
+		
+		this.states.is_last_level= this.level.is_last_level;
+		this.states.level_title= this.level.title;
+		this.states.level_comment= this.level.comment;
+		this.states.goals= this.level.goals.map( goal=> Object.assign( { made:false, }, goal, ), );
 	}
 	
 	store()
