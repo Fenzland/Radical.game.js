@@ -55,4 +55,4 @@ export const goals= [
 	},
 ];
 
-export const is_last_level= true;
+export const is_last_level= false;
