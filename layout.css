@@ -132,8 +132,14 @@ body>aside>.goals>header{
 
 body>aside>.goals>main{
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-evenly;
+	padding: 1.25em;
 	text-align: center;
+}
+
+body>aside>.goals>main>section{
+	margin: 0.25em;
 }
 
 body>footer{
