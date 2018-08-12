@@ -3,6 +3,7 @@ import View from 'https://ovo.fenzland.com/OvO/view/View.js';
 import Listener from 'https://ovo.fenzland.com/OvO/view/Listener.js';
 import { If, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
 import HTML, { main, header, footer, aside, section, article, div, button, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
+import { $, } from 'https://ovo.fenzland.com/OvO/model/Model.js';
 import Radical from '/radical.js';
 import storage from '/storage.js';
 import GameManager from '/game-manager.js';
@@ -25,6 +26,8 @@ view.update(
 	[
 		header(
 			'關卡：', game_manager.states.level,
+			h1( game_manager.states.level_title, ),
+			p( game_manager.states.level_comment, ),
 		),
 		main(
 			section(
@@ -60,6 +63,18 @@ view.update(
 				div(
 					p( '手裏的字：', ),
 					section( radical.states.holding, ),
+				),
+			),
+			div(
+				{ class:'goals', },
+				header( '目標文字：', ),
+				main(
+					ForEach( game_manager.states.goals, goal=> [
+						section(
+							{ class:goal.made.$( x=> x?'':'placeholder', ), },
+							$( ( made, character, placeholder, )=> made? character : placeholder, goal.made, goal.character, goal.placeholder, ),
+						),
+					], ),
 				),
 			),
 		),
