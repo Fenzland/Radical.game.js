@@ -42,15 +42,15 @@ view.update(
 					),
 				], ),
 			], ),
+			If( radical.states.paused, ).then( [
+				dialog( 'Paused', { class:'paused', open:true, }, ),
+			], ),
 			If( radical.states.over, ).then( [
 				dialog(
 					{ class:'game-over', open:true, },
 					p( 'Game Over', ),
 					p( button( 'restart', new Listener( 'click', ()=> game_manager.restart(), ), ), ),
 				),
-			], ),
-			If( radical.states.paused, ).then( [
-				dialog( 'Paused', { class:'paused', open:true, }, ),
 			], ),
 		),
 		aside(
