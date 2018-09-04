@@ -1,5 +1,5 @@
-import Model from 'https://ovo.fenzland.com/OvO/model/Model.js';
-import { map, } from 'https://ovo.fenzland.com/OvO/support/EnumerableObject.js';
+import 'https://oxo.fenzland.com/OsO/0.1/polyfill.js';
+import Model from 'https://oxo.fenzland.com/OmO/0.1/Model.js';
 import { mergeHorizontal, mergeVertical, } from './formulator.js'
 
 export default class Radical extends EventTarget
@@ -44,8 +44,8 @@ export default class Radical extends EventTarget
 			}, );
 		}, );
 		
-		map( script.states, ( key, value, )=> this.states[key]= value );
-		map( script.falling, ( key, value, )=> this.falling[key]= value );
+		Object.map( script.states, ( key, value, )=> this.states[key]= value );
+		Object.map( script.falling, ( key, value, )=> this.falling[key]= value );
 	}
 	
 	makeUnit()

@@ -1,5 +1,5 @@
-import Model from 'https://ovo.fenzland.com/OvO/model/Model.js';
-import { map, } from 'https://ovo.fenzland.com/OvO/support/EnumerableObject.js';
+import 'https://oxo.fenzland.com/OsO/0.1/polyfill.js';
+import Model from 'https://oxo.fenzland.com/OmO/0.1/Model.js';
 
 export default class GameManager
 {
@@ -84,7 +84,7 @@ export default class GameManager
 			return;
 		
 		this.radical.import( data.radical, );
-		map( data.states, ( key, value, )=> this.states[key]= value );
+		Object.map( data.states, ( key, value, )=> this.states[key]= value );
 	}
 	
 	write( character, )

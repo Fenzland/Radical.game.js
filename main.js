@@ -1,9 +1,8 @@
-import 'https://ovo.fenzland.com/init.js';
-import View from 'https://ovo.fenzland.com/OvO/view/View.js';
-import Listener from 'https://ovo.fenzland.com/OvO/view/Listener.js';
-import { If, IfNot, ForEach, } from 'https://ovo.fenzland.com/OvO/view/Ctrl.js';
-import HTML, { main, header, footer, aside, section, article, div, button, h1, h2, p, small, a, dialog, } from 'https://ovo.fenzland.com/OvO/view/HTML.js';
-import { $, } from 'https://ovo.fenzland.com/OvO/model/Model.js';
+import View from 'https://oxo.fenzland.com/OvO/0.1/View.js';
+import Listener from 'https://oxo.fenzland.com/OvO/0.1/Listener.js';
+import { If, IfNot, ForEach, } from 'https://oxo.fenzland.com/OvO/0.1/Ctrl.js';
+import HTML, { main, header, footer, aside, section, article, div, button, h1, h2, p, small, a, dialog, } from 'https://oxo.fenzland.com/OvO/0.1/HTML.js';
+import { $, } from 'https://oxo.fenzland.com/OmO/0.1/Model.js';
 import Radical from '/radical.js';
 import storage from '/storage.js';
 import GameManager from '/game-manager.js';
